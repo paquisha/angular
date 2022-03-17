@@ -1,0 +1,18 @@
+<h4>{{title}}</h4>
+<form (submit)="addTodo($event)">
+    <input id="task" name="task" type="text" />
+    <button type="submit" class="btn btn-success">Add</button>
+</form>
+
+<ul>
+    <li *ngFor="let todo of list">
+        <div>
+            <label>
+                <input type="checkbox" 
+                    [checked]="todo.isCompleted" 
+                    (change)="toggleTodo(todo.id, !todo.isCompleted)" />
+                    <span [style.textDecoration]="todo.isCompleted ? 'line-through;' : ''">{{todo.task}}</span>
+            </label>           
+        </div>
+    </li>
+</ul>
