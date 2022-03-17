@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FilterType } from '../filter-type';
 import { Todo } from '../todo';
 
 function generateId(){
@@ -14,6 +15,9 @@ export class TodosComponent implements OnInit {
 
   title = 'Prueba de todos';
   list: Todo[] = [];
+  filterType = FilterType;
+  filterBy: FilterType = FilterType.All;
+  filterList: Todo[] = this.list;
 
   
   constructor() { }
@@ -42,4 +46,24 @@ export class TodosComponent implements OnInit {
       return todo;
     });
   }
+
+  deleteTodo(id: string){
+    this.list = this.list.filter((todo) => todo.id !== id);
+  }
+
+  filterTodosBy(filterType: FilterType){
+    switch(filterType){
+      case FilterType.Active:
+        this.filterList = this.list.filter((todo) => !todo.isCompleted);
+        break;
+      case FilterType.Completed:
+        this.filterList = this.list.filter((todo) => !todo.isCompleted);
+        break;
+      default:
+        this.filterList = this.list;
+        break;        
+    }
+  }
+
+
 }

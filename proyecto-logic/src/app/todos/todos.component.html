@@ -11,8 +11,21 @@
                 <input type="checkbox" 
                     [checked]="todo.isCompleted" 
                     (change)="toggleTodo(todo.id, !todo.isCompleted)" />
-                    <span [style.textDecoration]="todo.isCompleted ? 'line-through;' : ''">{{todo.task}}</span>
+                    <!----<span 
+                        [style.textDecoration]="todo.isCompleted ? 'line-through;' : ''"
+                        
+                    >{{todo.task}}</span>---->
+
+                    <span [ngClass]="{'completed': todo.isCompleted}">
+                        {{todo.task}}
+                    </span>
+                    <button (click)="deleteTodo(todo.id)">Delete</button>
             </label>           
         </div>
     </li>
 </ul>
+<div>
+    <button class="btn btn-primary" (click)="filterTodosBy(filterType.All)">All</button>
+    <button class="btn btn-success" (click)="filterTodosBy(filterType.Active)">Active</button>
+    <button class="btn btn-warning" (click)="filterTodosBy(filterType.Completed)">Completed</button>
+</div>
